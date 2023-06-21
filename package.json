@@ -1,10 +1,14 @@
 {
   "devDependencies": {
+    "@nomiclabs/hardhat-web3": "^2.0.0",
     "@openzeppelin/test-environment": "^0.1.9",
+    "@openzeppelin/test-helpers": "^0.5.16",
     "chai": "^4.3.7",
     "ganache-cli": "^6.12.2",
+    "hardhat": "^2.15.0",
     "mocha": "^10.2.0",
-    "truffle": "^5.8.4"
+    "truffle": "^5.8.4",
+    "web3": "^1.10.0"
   },
   "name": "virtual-net-metering",
   "description": "Repository for my thesis implementing virtual net metering on an actual blockchain",
@@ -466,7 +470,6 @@
     "vary": "^1.1.2",
     "verror": "^1.10.0",
     "vuvuzela": "^1.0.3",
-    "web3": "^1.8.2",
     "web3-bzz": "^1.8.2",
     "web3-core": "^1.8.2",
     "web3-core-helpers": "^1.8.2",

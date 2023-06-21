@@ -1,16 +1,10 @@
-const { accounts, contract } = require('@openzeppelin/test-environment');
-const [ owner ] = accounts; // an array with the addresses of all unlocked accounts in the local blockchain
+const Solar = artifacts.require("Solar");
 
-const { expect } = require('chai');
+contract("Solar", (accounts) => {
+  it("should put 1000 SLR in the first account", async () => {
+    const solarInstance = await Solar.deployed();
+    const balance = await solarInstance.balanceOf.call(accounts[0]);
 
-const Solar = contract.fromArtifact('Solar'); // Loads the compiled Solar contract
-
-// Test cases are declared with the it function and grouped in describe blocks
-describe('MyContract', function () {
-
-    it('deployer is owner', async function () {
-      const solarContract = await Solar.new({ from: owner });
-      expect(await solarContract.owner()).to.equal(owner);
-    });
+    assert.equal(balance.valueOf(), 0, "0 wasn't in the first account");
   });
-
+});
