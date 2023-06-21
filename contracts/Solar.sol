@@ -1,6 +1,6 @@
 //SPDX-License-Identifier: Unlicense
 // contracts/House.sol
-/// @title A contract with functions and state variables for a house creating solar energy
+/// @title ERC20 contract
 /// @author Julia Groza
 /// @notice 
 
