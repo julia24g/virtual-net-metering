@@ -26,8 +26,8 @@ contract TestHouse {
       uint demand = 10;
       uint pvGenerated = 15;
       house.setDemand(demand);
-      bool expected = true;
+      house.setPVGeneration(pvGenerated);
 
-      Assert.equal(house.setPVGeneration(pvGenerated), expected, "Output should be true");
+      Assert.equal(house.getTokenBalance(), pvGenerated - demand, "Owner should have 5 solar tokens");
   }
 }

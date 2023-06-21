@@ -9,8 +9,8 @@ contract TestSolarToken {
     function testInitialBalanceUsingDeployedContract() public {
         Solar slr = Solar(DeployedAddresses.Solar());
 
-        uint expected = 0;
+        uint expected = 27;
 
-        Assert.equal(slr.balanceOf(tx.origin), expected, "Owner should have 0 Solar initially");
+        Assert.equal(slr.balanceOf(tx.origin), expected, "Owner should have 27 Solar initially");
   }
 }

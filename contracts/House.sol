@@ -5,6 +5,8 @@
 /// @notice 
 
 pragma solidity ^0.8.0;
+import "hardhat/console.sol";
+import "./Solar.sol";
 
 contract House {
 
@@ -12,30 +14,27 @@ contract House {
     uint public pvGeneration;
     uint public demand;
     string public postalCode;
+    Solar public token;
 
     // Creating a constructor to set postal code of house and pv generated to 0
     constructor(string memory _postalCode) {                 
         postalCode = _postalCode;
-        pvGeneration = 0;    
+        pvGeneration = 0;
+        console.log("Deployed House by '%s'", msg.sender);
     } 
 
     // Set pv generation value
-    function setPVGeneration(uint _pvGeneration) public returns (bool)
+    function setPVGeneration(uint _pvGeneration) public
     {
         pvGeneration = _pvGeneration;
-        if (demandExceeded() == true)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        console.log("Set PV generated to ",pvGeneration);    
+        checkIfDemandExceeded();
     }
 
     // Get pv generation value
     function getPVGeneration() public view returns (uint)
     {
+        console.log("Get PV generated: ",pvGeneration); 
         return pvGeneration;
     }
 
@@ -43,24 +42,28 @@ contract House {
     function setDemand(uint _demand) public
     {
         demand = _demand;
+        console.log("Set demand to ",demand); 
     }
 
     // Get demand value
     function getDemand() public view returns (uint)
     {
         return demand;
+        console.log("Get demand: ",pvGeneration); 
     }
 
     // check if PVGeneration is greater than demand
-    function demandExceeded() internal view returns (bool)
+    function checkIfDemandExceeded() internal
     {
         if (pvGeneration > demand)
         {
-            return true;
+            token = new Solar(pvGeneration - demand);
+            console.log("Solar token balance of account: ", token.balanceOf(msg.sender));
         }
-        else
-        {
-            return false;
-        }
+    }
+
+    function getTokenBalance() public view returns (uint)
+    {
+        return token.balanceOf(msg.sender);
     }
 }
