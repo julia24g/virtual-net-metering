@@ -1,6 +1,9 @@
 {
   "devDependencies": {
+    "@openzeppelin/test-environment": "^0.1.9",
+    "chai": "^4.3.7",
     "ganache-cli": "^6.12.2",
+    "mocha": "^10.2.0",
     "truffle": "^5.8.4"
   },
   "name": "virtual-net-metering",
@@ -8,6 +11,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
+    "@openzeppelin/contracts": "^4.9.2",
     "abort-controller": "^3.0.0",
     "abortcontroller-polyfill": "^1.7.5",
     "abstract-leveldown": "^7.2.0",
@@ -508,7 +512,7 @@
     "yocto-queue": "^0.1.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --exit --recursive"
   },
   "repository": {
     "type": "git",
