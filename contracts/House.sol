@@ -20,9 +20,17 @@ contract House {
     } 
 
     // Set pv generation value
-    function setPVGeneration(uint _pvGeneration) public
+    function setPVGeneration(uint _pvGeneration) public returns (bool)
     {
         pvGeneration = _pvGeneration;
+        if (demandExceeded() == true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     // Get pv generation value
@@ -44,7 +52,7 @@ contract House {
     }
 
     // check if PVGeneration is greater than demand
-    function demandExceeded() private view returns (bool)
+    function demandExceeded() internal view returns (bool)
     {
         if (pvGeneration > demand)
         {

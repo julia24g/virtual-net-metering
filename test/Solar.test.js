@@ -1,7 +1,7 @@
 const Solar = artifacts.require("Solar");
 
 contract("Solar", (accounts) => {
-  it("should put 1000 SLR in the first account", async () => {
+  it("Initialize account with 0 Solar Tokens", async () => {
     const solarInstance = await Solar.deployed();
     const balance = await solarInstance.balanceOf.call(accounts[0]);
 
