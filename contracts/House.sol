@@ -57,8 +57,10 @@ contract House {
     {
         if (pvGeneration > demand)
         {
-            token = new Solar(pvGeneration - demand);
+            token = new Solar(pvGeneration - demand, msg.sender);
             console.log("Solar token balance of account: ", token.balanceOf(msg.sender));
+            console.log("From account: ", msg.sender);
+            // makeTransfer(msg.sender); 
         }
     }
 
