@@ -13,12 +13,22 @@ contract House {
     // Declaring state variables
     uint public pvGeneration;
     uint public demand;
-    string public postalCode;
+    int public latitude;
+    int public longitude;
     Solar public token;
 
     // Creating a constructor to set postal code of house and pv generated to 0
-    constructor(string memory _postalCode) {                 
-        postalCode = _postalCode;
+    constructor(int _latitude, int _longitude) public {                 
+        latitude = _latitude;
+        longitude = _longitude;
+        pvGeneration = 0;
+        console.log("Deployed House by '%s'", msg.sender);
+    } 
+
+    // Creating an initializer for HouseFactory to set coordinates of house and pv generated to 0
+    function initialize(int _latitude, int _longitude) public {                 
+        latitude = _latitude;
+        longitude = _longitude;
         pvGeneration = 0;
         console.log("Deployed House by '%s'", msg.sender);
     } 
@@ -38,18 +48,33 @@ contract House {
         return pvGeneration;
     }
 
+    // Get latitude
+    function getLatitude() public view returns (int)
+    {
+        console.logInt(latitude); 
+        return latitude;
+    }
+
+    // Get longitude
+    function getLongitude() public view returns (int)
+    {
+        console.logInt(longitude); 
+        return longitude;
+    }
+
     // Set demand Value
     function setDemand(uint _demand) public
     {
+        console.log("Set demand to ",_demand); 
         demand = _demand;
-        console.log("Set demand to ",demand); 
     }
 
     // Get demand value
     function getDemand() public view returns (uint)
     {
+        console.log("Get demand: ",demand); 
         return demand;
-        console.log("Get demand: ",pvGeneration); 
+
     }
 
     // check if PVGeneration is greater than demand

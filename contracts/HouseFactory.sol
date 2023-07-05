@@ -8,41 +8,31 @@ pragma solidity ^0.8.0;
 
 import "hardhat/console.sol";
 import "./House.sol";
-import "@optionality.io/clone-factory/contracts/CloneFactory.sol";
-import "zeppelin-solidity/contracts/ownership/Ownable.sol";
+import "@openzeppelin/contracts/proxy/Clones.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract HouseFactory is Ownable, CloneFactory{
 
-    using StructuredLinkedList for StructuredLinkedList.List;
+contract HouseFactory is Ownable{
 
     address public libraryAddress;
-    event HouseCreated(House newHouse);
-    House[] public clones;
-    mapping(House => StructuredLinkedList.List list;) public myMap;
-
-    
-
-
+    event HouseCreated(address newHouse);
+    address[] public clones;
 
     // Initializing the address that deploys the HouseFactory contract
-    function HouseFactory(address _libraryAddress) public {
+    constructor(address _libraryAddress) public {
         libraryAddress = _libraryAddress;
     }
 
-    // If we want to change the owner of the HouseFactory contract, we can do so here
-    function setLibraryAddress(address _libraryAddress) public onlyOwner {
-        libraryAddress = _libraryAddress;
-    }
-
-    function createHouse(string _latitude, string _longitude) public {
-        House house = House(createClone(libraryAddress)); // creates a new House object with the createClone function from House.sol
-        house.initialize(_latitude, _longitude); // initializes the new house
+    function createHouse(int _latitude, int _longitude) external {
+        address house = Clones.clone(libraryAddress); // creates a new House object with the createClone function from CloneFactory.sol
+        House newHouse = House(house);
+        newHouse.initialize(_latitude, _longitude);
         clones.push(house); // adds house to array of houses in the HouseFactory contract
-        emit HouseCreated(clone); // emits an event for visibility purposes
-
+        emit HouseCreated(house); // emits an event for visibility purposes
+        console.log("House created with address: ", house);
     }
 
-    function getAllHouses() external view returns (House[] memory) {
+    function getAllHouses() external view returns (address[] memory) {
         return clones;
     }
 
@@ -58,10 +48,4 @@ contract HouseFactory is Ownable, CloneFactory{
     function calculateDistanceBetweenHouses(House house1, House house2) internal {
 
     }
-
-    function sortLinkedList() internal {
-
-    }
-
-
 }

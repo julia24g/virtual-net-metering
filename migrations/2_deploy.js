@@ -1,6 +1,7 @@
 // migrations/2_deploy.js
 const Solar = artifacts.require("Solar");
 const House = artifacts.require("House");
+const HouseFactory = artifacts.require("HouseFactory");
 
 module.exports = async function (deployer) {
   var amount = 27;
@@ -8,8 +9,12 @@ module.exports = async function (deployer) {
   await deployer.deploy(Solar, amount, owner).then(() => console.log(Solar.address));
   const instance = await Solar.deployed();
   
-
-  var postalCode = "L3T2Z1";
-  await deployer.deploy(House, postalCode).then(() => console.log(House.address));
+  var latitude = 43;
+  var longitude = -79;
+  await deployer.deploy(House, latitude, longitude).then(() => console.log(House.address));
   const instance2 = await House.deployed();
+
+  var libraryAddress = "0x5f8e26facc23fa4cbd87b8d9dbbd33d5047abde1";
+  await deployer.deploy(HouseFactory, libraryAddress).then(() => console.log(HouseFactory.address));
+  const instance3 = await HouseFactory.deployed();
 };

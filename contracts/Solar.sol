@@ -17,6 +17,4 @@ contract Solar is ERC20 {
         console.log("Deployed Solar by '%s'", owner);
         _mint(owner, amount);
     }
-
-    // Setting up the exchange
 }
