@@ -12,7 +12,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 contract Solar is ERC20 {
 
     // Creating a constructor to set pv generated
-    constructor(uint amount, address owner) public ERC20("Solar", "SLR") {
+    constructor(uint amount, address owner) ERC20("Solar", "SLR") {
         // not adding anything in constructor because we want to set the number of solar tokens to 0                 
         console.log("Deployed Solar by '%s'", owner);
         _mint(owner, amount);

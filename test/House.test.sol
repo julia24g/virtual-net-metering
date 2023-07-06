@@ -34,10 +34,10 @@ contract TestHouse {
   function testGettingLatitudeAndLongitude() public
   {
     House house = House(DeployedAddresses.House());
-    int latitude = 43;
-    int longitude = -79;
+    uint latitude = 43; 
+    uint longitude = 79;
 
     Assert.equal(house.getLatitude(), latitude, "House should have latitude of 43");
-    Assert.equal(house.getLongitude(), longitude, "House should have latitude of -79");
+    Assert.equal(house.getLongitude(), longitude, "House should have latitude of 79");
   }
 }

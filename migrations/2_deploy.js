@@ -10,7 +10,7 @@ module.exports = async function (deployer) {
   const instance = await Solar.deployed();
   
   var latitude = 43;
-  var longitude = -79;
+  var longitude = 79;
   await deployer.deploy(House, latitude, longitude).then(() => console.log(House.address));
   const instance2 = await House.deployed();
 

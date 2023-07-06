@@ -17,6 +17,7 @@
   "dependencies": {
     "@openzeppelin/contracts": "^4.9.2",
     "@optionality.io/clone-factory": "^0.2.1",
+    "@prb/math": "^4.0.1",
     "abort-controller": "^3.0.0",
     "abortcontroller-polyfill": "^1.7.5",
     "abstract-leveldown": "^7.2.0",
@@ -420,6 +421,7 @@
     "simple-concat": "^1.0.1",
     "simple-get": "^2.8.2",
     "snake-case": "^2.1.0",
+    "solmate": "^6.1.0",
     "spark-md5": "^3.0.2",
     "sshpk": "^1.17.0",
     "statuses": "^2.0.1",

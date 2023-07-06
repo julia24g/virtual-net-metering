@@ -13,12 +13,12 @@ contract House {
     // Declaring state variables
     uint public pvGeneration;
     uint public demand;
-    int public latitude;
-    int public longitude;
+    uint public latitude;
+    uint public longitude;
     Solar public token;
 
     // Creating a constructor to set postal code of house and pv generated to 0
-    constructor(int _latitude, int _longitude) public {                 
+    constructor(uint _latitude, uint _longitude) {                 
         latitude = _latitude;
         longitude = _longitude;
         pvGeneration = 0;
@@ -26,7 +26,7 @@ contract House {
     } 
 
     // Creating an initializer for HouseFactory to set coordinates of house and pv generated to 0
-    function initialize(int _latitude, int _longitude) public {                 
+    function initialize(uint _latitude, uint _longitude) public {                 
         latitude = _latitude;
         longitude = _longitude;
         pvGeneration = 0;
@@ -49,16 +49,16 @@ contract House {
     }
 
     // Get latitude
-    function getLatitude() public view returns (int)
+    function getLatitude() public view returns (uint)
     {
-        console.logInt(latitude); 
+        console.logUint(latitude); 
         return latitude;
     }
 
     // Get longitude
-    function getLongitude() public view returns (int)
+    function getLongitude() public view returns (uint)
     {
-        console.logInt(longitude); 
+        console.logUint(longitude); 
         return longitude;
     }
 
