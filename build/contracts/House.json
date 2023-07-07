@@ -3074,7 +3074,7 @@
                 }
               ]
             },
-            "name": "convert_t_contract$_Solar_$9724_to_t_address",
+            "name": "convert_t_contract$_Solar_$9774_to_t_address",
             "nodeType": "YulFunctionDefinition",
             "parameters": [
               {
@@ -3116,7 +3116,7 @@
                           }
                         ],
                         "functionName": {
-                          "name": "convert_t_contract$_Solar_$9724_to_t_address",
+                          "name": "convert_t_contract$_Solar_$9774_to_t_address",
                           "nodeType": "YulIdentifier",
                           "src": "2582:44:11"
                         },
@@ -3137,7 +3137,7 @@
                 }
               ]
             },
-            "name": "abi_encode_t_contract$_Solar_$9724_to_t_address_fromStack",
+            "name": "abi_encode_t_contract$_Solar_$9774_to_t_address_fromStack",
             "nodeType": "YulFunctionDefinition",
             "parameters": [
               {
@@ -3227,7 +3227,7 @@
                       }
                     ],
                     "functionName": {
-                      "name": "abi_encode_t_contract$_Solar_$9724_to_t_address_fromStack",
+                      "name": "abi_encode_t_contract$_Solar_$9774_to_t_address_fromStack",
                       "nodeType": "YulIdentifier",
                       "src": "2804:57:11"
                     },
@@ -3239,7 +3239,7 @@
                 }
               ]
             },
-            "name": "abi_encode_tuple_t_contract$_Solar_$9724__to_t_address__fromStack_reversed",
+            "name": "abi_encode_tuple_t_contract$_Solar_$9774__to_t_address__fromStack_reversed",
             "nodeType": "YulFunctionDefinition",
             "parameters": [
               {
@@ -5233,7 +5233,7 @@
           }
         ]
       },
-      "contents": "{\n\n    function allocate_unbounded() -> memPtr {\n        memPtr := mload(64)\n    }\n\n    function revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() {\n        revert(0, 0)\n    }\n\n    function revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() {\n        revert(0, 0)\n    }\n\n    function cleanup_t_uint256(value) -> cleaned {\n        cleaned := value\n    }\n\n    function validator_revert_t_uint256(value) {\n        if iszero(eq(value, cleanup_t_uint256(value))) { revert(0, 0) }\n    }\n\n    function abi_decode_t_uint256(offset, end) -> value {\n        value := calldataload(offset)\n        validator_revert_t_uint256(value)\n    }\n\n    function abi_decode_tuple_t_uint256(headStart, dataEnd) -> value0 {\n        if slt(sub(dataEnd, headStart), 32) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_uint256(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function abi_encode_t_uint256_to_t_uint256_fromStack(value, pos) {\n        mstore(pos, cleanup_t_uint256(value))\n    }\n\n    function abi_encode_tuple_t_uint256__to_t_uint256__fromStack_reversed(headStart , value0) -> tail {\n        tail := add(headStart, 32)\n\n        abi_encode_t_uint256_to_t_uint256_fromStack(value0,  add(headStart, 0))\n\n    }\n\n    function abi_decode_tuple_t_uint256t_uint256(headStart, dataEnd) -> value0, value1 {\n        if slt(sub(dataEnd, headStart), 64) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_uint256(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 32\n\n            value1 := abi_decode_t_uint256(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function cleanup_t_uint160(value) -> cleaned {\n        cleaned := and(value, 0xffffffffffffffffffffffffffffffffffffffff)\n    }\n\n    function identity(value) -> ret {\n        ret := value\n    }\n\n    function convert_t_uint160_to_t_uint160(value) -> converted {\n        converted := cleanup_t_uint160(identity(cleanup_t_uint160(value)))\n    }\n\n    function convert_t_uint160_to_t_address(value) -> converted {\n        converted := convert_t_uint160_to_t_uint160(value)\n    }\n\n    function convert_t_contract$_Solar_$9724_to_t_address(value) -> converted {\n        converted := convert_t_uint160_to_t_address(value)\n    }\n\n    function abi_encode_t_contract$_Solar_$9724_to_t_address_fromStack(value, pos) {\n        mstore(pos, convert_t_contract$_Solar_$9724_to_t_address(value))\n    }\n\n    function abi_encode_tuple_t_contract$_Solar_$9724__to_t_address__fromStack_reversed(headStart , value0) -> tail {\n        tail := add(headStart, 32)\n\n        abi_encode_t_contract$_Solar_$9724_to_t_address_fromStack(value0,  add(headStart, 0))\n\n    }\n\n    function cleanup_t_address(value) -> cleaned {\n        cleaned := cleanup_t_uint160(value)\n    }\n\n    function abi_encode_t_address_to_t_address_fromStack(value, pos) {\n        mstore(pos, cleanup_t_address(value))\n    }\n\n    function abi_encode_tuple_t_address__to_t_address__fromStack_reversed(headStart , value0) -> tail {\n        tail := add(headStart, 32)\n\n        abi_encode_t_address_to_t_address_fromStack(value0,  add(headStart, 0))\n\n    }\n\n    function abi_decode_t_uint256_fromMemory(offset, end) -> value {\n        value := mload(offset)\n        validator_revert_t_uint256(value)\n    }\n\n    function abi_decode_tuple_t_uint256_fromMemory(headStart, dataEnd) -> value0 {\n        if slt(sub(dataEnd, headStart), 32) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_uint256_fromMemory(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function array_length_t_string_memory_ptr(value) -> length {\n\n        length := mload(value)\n\n    }\n\n    function array_storeLengthForEncoding_t_string_memory_ptr_fromStack(pos, length) -> updated_pos {\n        mstore(pos, length)\n        updated_pos := add(pos, 0x20)\n    }\n\n    function copy_memory_to_memory_with_cleanup(src, dst, length) {\n        let i := 0\n        for { } lt(i, length) { i := add(i, 32) }\n        {\n            mstore(add(dst, i), mload(add(src, i)))\n        }\n        mstore(add(dst, length), 0)\n    }\n\n    function round_up_to_mul_of_32(value) -> result {\n        result := and(add(value, 31), not(31))\n    }\n\n    function abi_encode_t_string_memory_ptr_to_t_string_memory_ptr_fromStack(value, pos) -> end {\n        let length := array_length_t_string_memory_ptr(value)\n        pos := array_storeLengthForEncoding_t_string_memory_ptr_fromStack(pos, length)\n        copy_memory_to_memory_with_cleanup(add(value, 0x20), pos, length)\n        end := add(pos, round_up_to_mul_of_32(length))\n    }\n\n    function abi_encode_tuple_t_string_memory_ptr_t_uint256__to_t_string_memory_ptr_t_uint256__fromStack_reversed(headStart , value1, value0) -> tail {\n        tail := add(headStart, 64)\n\n        mstore(add(headStart, 0), sub(tail, headStart))\n        tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr_fromStack(value0,  tail)\n\n        abi_encode_t_uint256_to_t_uint256_fromStack(value1,  add(headStart, 32))\n\n    }\n\n    function panic_error_0x11() {\n        mstore(0, 35408467139433450592217433187231851964531694900788300625387963629091585785856)\n        mstore(4, 0x11)\n        revert(0, 0x24)\n    }\n\n    function checked_sub_t_uint256(x, y) -> diff {\n        x := cleanup_t_uint256(x)\n        y := cleanup_t_uint256(y)\n        diff := sub(x, y)\n\n        if gt(diff, x) { panic_error_0x11() }\n\n    }\n\n    function abi_encode_tuple_t_uint256_t_address__to_t_uint256_t_address__fromStack_reversed(headStart , value1, value0) -> tail {\n        tail := add(headStart, 64)\n\n        abi_encode_t_uint256_to_t_uint256_fromStack(value0,  add(headStart, 0))\n\n        abi_encode_t_address_to_t_address_fromStack(value1,  add(headStart, 32))\n\n    }\n\n    function abi_encode_tuple_t_string_memory_ptr_t_address__to_t_string_memory_ptr_t_address__fromStack_reversed(headStart , value1, value0) -> tail {\n        tail := add(headStart, 64)\n\n        mstore(add(headStart, 0), sub(tail, headStart))\n        tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr_fromStack(value0,  tail)\n\n        abi_encode_t_address_to_t_address_fromStack(value1,  add(headStart, 32))\n\n    }\n\n}\n",
+      "contents": "{\n\n    function allocate_unbounded() -> memPtr {\n        memPtr := mload(64)\n    }\n\n    function revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() {\n        revert(0, 0)\n    }\n\n    function revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() {\n        revert(0, 0)\n    }\n\n    function cleanup_t_uint256(value) -> cleaned {\n        cleaned := value\n    }\n\n    function validator_revert_t_uint256(value) {\n        if iszero(eq(value, cleanup_t_uint256(value))) { revert(0, 0) }\n    }\n\n    function abi_decode_t_uint256(offset, end) -> value {\n        value := calldataload(offset)\n        validator_revert_t_uint256(value)\n    }\n\n    function abi_decode_tuple_t_uint256(headStart, dataEnd) -> value0 {\n        if slt(sub(dataEnd, headStart), 32) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_uint256(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function abi_encode_t_uint256_to_t_uint256_fromStack(value, pos) {\n        mstore(pos, cleanup_t_uint256(value))\n    }\n\n    function abi_encode_tuple_t_uint256__to_t_uint256__fromStack_reversed(headStart , value0) -> tail {\n        tail := add(headStart, 32)\n\n        abi_encode_t_uint256_to_t_uint256_fromStack(value0,  add(headStart, 0))\n\n    }\n\n    function abi_decode_tuple_t_uint256t_uint256(headStart, dataEnd) -> value0, value1 {\n        if slt(sub(dataEnd, headStart), 64) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_uint256(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 32\n\n            value1 := abi_decode_t_uint256(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function cleanup_t_uint160(value) -> cleaned {\n        cleaned := and(value, 0xffffffffffffffffffffffffffffffffffffffff)\n    }\n\n    function identity(value) -> ret {\n        ret := value\n    }\n\n    function convert_t_uint160_to_t_uint160(value) -> converted {\n        converted := cleanup_t_uint160(identity(cleanup_t_uint160(value)))\n    }\n\n    function convert_t_uint160_to_t_address(value) -> converted {\n        converted := convert_t_uint160_to_t_uint160(value)\n    }\n\n    function convert_t_contract$_Solar_$9774_to_t_address(value) -> converted {\n        converted := convert_t_uint160_to_t_address(value)\n    }\n\n    function abi_encode_t_contract$_Solar_$9774_to_t_address_fromStack(value, pos) {\n        mstore(pos, convert_t_contract$_Solar_$9774_to_t_address(value))\n    }\n\n    function abi_encode_tuple_t_contract$_Solar_$9774__to_t_address__fromStack_reversed(headStart , value0) -> tail {\n        tail := add(headStart, 32)\n\n        abi_encode_t_contract$_Solar_$9774_to_t_address_fromStack(value0,  add(headStart, 0))\n\n    }\n\n    function cleanup_t_address(value) -> cleaned {\n        cleaned := cleanup_t_uint160(value)\n    }\n\n    function abi_encode_t_address_to_t_address_fromStack(value, pos) {\n        mstore(pos, cleanup_t_address(value))\n    }\n\n    function abi_encode_tuple_t_address__to_t_address__fromStack_reversed(headStart , value0) -> tail {\n        tail := add(headStart, 32)\n\n        abi_encode_t_address_to_t_address_fromStack(value0,  add(headStart, 0))\n\n    }\n\n    function abi_decode_t_uint256_fromMemory(offset, end) -> value {\n        value := mload(offset)\n        validator_revert_t_uint256(value)\n    }\n\n    function abi_decode_tuple_t_uint256_fromMemory(headStart, dataEnd) -> value0 {\n        if slt(sub(dataEnd, headStart), 32) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_uint256_fromMemory(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function array_length_t_string_memory_ptr(value) -> length {\n\n        length := mload(value)\n\n    }\n\n    function array_storeLengthForEncoding_t_string_memory_ptr_fromStack(pos, length) -> updated_pos {\n        mstore(pos, length)\n        updated_pos := add(pos, 0x20)\n    }\n\n    function copy_memory_to_memory_with_cleanup(src, dst, length) {\n        let i := 0\n        for { } lt(i, length) { i := add(i, 32) }\n        {\n            mstore(add(dst, i), mload(add(src, i)))\n        }\n        mstore(add(dst, length), 0)\n    }\n\n    function round_up_to_mul_of_32(value) -> result {\n        result := and(add(value, 31), not(31))\n    }\n\n    function abi_encode_t_string_memory_ptr_to_t_string_memory_ptr_fromStack(value, pos) -> end {\n        let length := array_length_t_string_memory_ptr(value)\n        pos := array_storeLengthForEncoding_t_string_memory_ptr_fromStack(pos, length)\n        copy_memory_to_memory_with_cleanup(add(value, 0x20), pos, length)\n        end := add(pos, round_up_to_mul_of_32(length))\n    }\n\n    function abi_encode_tuple_t_string_memory_ptr_t_uint256__to_t_string_memory_ptr_t_uint256__fromStack_reversed(headStart , value1, value0) -> tail {\n        tail := add(headStart, 64)\n\n        mstore(add(headStart, 0), sub(tail, headStart))\n        tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr_fromStack(value0,  tail)\n\n        abi_encode_t_uint256_to_t_uint256_fromStack(value1,  add(headStart, 32))\n\n    }\n\n    function panic_error_0x11() {\n        mstore(0, 35408467139433450592217433187231851964531694900788300625387963629091585785856)\n        mstore(4, 0x11)\n        revert(0, 0x24)\n    }\n\n    function checked_sub_t_uint256(x, y) -> diff {\n        x := cleanup_t_uint256(x)\n        y := cleanup_t_uint256(y)\n        diff := sub(x, y)\n\n        if gt(diff, x) { panic_error_0x11() }\n\n    }\n\n    function abi_encode_tuple_t_uint256_t_address__to_t_uint256_t_address__fromStack_reversed(headStart , value1, value0) -> tail {\n        tail := add(headStart, 64)\n\n        abi_encode_t_uint256_to_t_uint256_fromStack(value0,  add(headStart, 0))\n\n        abi_encode_t_address_to_t_address_fromStack(value1,  add(headStart, 32))\n\n    }\n\n    function abi_encode_tuple_t_string_memory_ptr_t_address__to_t_string_memory_ptr_t_address__fromStack_reversed(headStart , value1, value0) -> tail {\n        tail := add(headStart, 64)\n\n        mstore(add(headStart, 0), sub(tail, headStart))\n        tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr_fromStack(value0,  tail)\n\n        abi_encode_t_address_to_t_address_fromStack(value1,  add(headStart, 32))\n\n    }\n\n}\n",
       "id": 11,
       "language": "Yul",
       "name": "#utility.yul"
@@ -5262,7 +5262,7 @@
         882
       ],
       "Solar": [
-        9724
+        9774
       ],
       "console": [
         9280
@@ -5302,7 +5302,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 9500,
-        "sourceUnit": 9725,
+        "sourceUnit": 9775,
         "src": "243:21:8",
         "symbolAliases": [],
         "unitAlias": ""
@@ -5312,7 +5312,7 @@
         "baseContracts": [],
         "canonicalName": "House",
         "contractDependencies": [
-          9724
+          9774
         ],
         "contractKind": "contract",
         "fullyImplemented": true,
@@ -5449,7 +5449,7 @@
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_Solar_$9724",
+              "typeIdentifier": "t_contract$_Solar_$9774",
               "typeString": "contract Solar"
             },
             "typeName": {
@@ -5462,13 +5462,13 @@
                   "428:5:8"
                 ],
                 "nodeType": "IdentifierPath",
-                "referencedDeclaration": 9724,
+                "referencedDeclaration": 9774,
                 "src": "428:5:8"
               },
-              "referencedDeclaration": 9724,
+              "referencedDeclaration": 9774,
               "src": "428:5:8",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Solar_$9724",
+                "typeIdentifier": "t_contract$_Solar_$9774",
                 "typeString": "contract Solar"
               }
             },
@@ -7265,7 +7265,7 @@
                             "referencedDeclaration": 9295,
                             "src": "2283:5:8",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_Solar_$9724",
+                              "typeIdentifier": "t_contract$_Solar_$9774",
                               "typeString": "contract Solar"
                             }
                           },
@@ -7362,7 +7362,7 @@
                               "nodeType": "NewExpression",
                               "src": "2291:9:8",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_function_creation_nonpayable$_t_uint256_$_t_address_$returns$_t_contract$_Solar_$9724_$",
+                                "typeIdentifier": "t_function_creation_nonpayable$_t_uint256_$_t_address_$returns$_t_contract$_Solar_$9774_$",
                                 "typeString": "function (uint256,address) returns (contract Solar)"
                               },
                               "typeName": {
@@ -7375,13 +7375,13 @@
                                     "2295:5:8"
                                   ],
                                   "nodeType": "IdentifierPath",
-                                  "referencedDeclaration": 9724,
+                                  "referencedDeclaration": 9774,
                                   "src": "2295:5:8"
                                 },
-                                "referencedDeclaration": 9724,
+                                "referencedDeclaration": 9774,
                                 "src": "2295:5:8",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_contract$_Solar_$9724",
+                                  "typeIdentifier": "t_contract$_Solar_$9774",
                                   "typeString": "contract Solar"
                                 }
                               }
@@ -7398,13 +7398,13 @@
                             "src": "2291:44:8",
                             "tryCall": false,
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_Solar_$9724",
+                              "typeIdentifier": "t_contract$_Solar_$9774",
                               "typeString": "contract Solar"
                             }
                           },
                           "src": "2283:52:8",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_Solar_$9724",
+                            "typeIdentifier": "t_contract$_Solar_$9774",
                             "typeString": "contract Solar"
                           }
                         },
@@ -7476,7 +7476,7 @@
                                   "referencedDeclaration": 9295,
                                   "src": "2397:5:8",
                                   "typeDescriptions": {
-                                    "typeIdentifier": "t_contract$_Solar_$9724",
+                                    "typeIdentifier": "t_contract$_Solar_$9774",
                                     "typeString": "contract Solar"
                                   }
                                 },
@@ -7757,7 +7757,7 @@
                         "referencedDeclaration": 9295,
                         "src": "2620:5:8",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_Solar_$9724",
+                          "typeIdentifier": "t_contract$_Solar_$9774",
                           "typeString": "contract Solar"
                         }
                       },
@@ -7931,10 +7931,22 @@
       "links": {},
       "address": "0xDDb64fE46a91D46ee29420539FC25FD07c5FEa3E",
       "transactionHash": "0x8375364d5e520713ac93767508c4a6794374dff4acfdcaf18b4a4b6d9f287259"
+    },
+    "1688678715490": {
+      "events": {},
+      "links": {},
+      "address": "0x5b1869D9A4C187F2EAa108f3062412ecf0526b24",
+      "transactionHash": "0x53eb9272a5d5e542b4054e7909f743ed62419620f5cf91ccf45578b0910117c6"
+    },
+    "1688759977700": {
+      "events": {},
+      "links": {},
+      "address": "0x5b9b42d6e4B2e4Bf8d42Eba32D46918e10899B66",
+      "transactionHash": "0x9f691bf902d654c1902ad67ed997a51ead61164142e8ac34b3fc93a6b10f7af0"
     }
   },
   "schemaVersion": "3.4.14",
-  "updatedAt": "2023-07-06T21:19:01.848Z",
+  "updatedAt": "2023-07-07T20:15:04.236Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

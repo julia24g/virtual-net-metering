@@ -22,8 +22,14 @@ contract TestHouseFactory {
     
     for (uint i = 0; i < allHouses.length; i++){
       House a = House(allHouses[i]);
-      a.setDemand(20);
+      console.logUint(a.getLatitude());
     }
+  }
+
+  function testCalculatingDistanceBetweenCoordinates() public
+  {
+    HouseFactory houseFactory = HouseFactory(DeployedAddresses.HouseFactory());
+    Assert.equal(houseFactory.calculateDistanceBetweenHouses(4382158637879012, 4381664455946044, 7939797813498498, 7938858901723961), 1061023611064, "Distance should be 1061023611064");
   }
 
 }
