@@ -28,7 +28,7 @@ contract TestHouse {
       house.setDemand(demand);
       house.setPVGeneration(pvGenerated);
 
-      Assert.equal(house.getTokenBalance(), pvGenerated - demand, "Owner should have 5 solar tokens");
+      Assert.equal(house.getSolarTokenBalance(), pvGenerated - demand, "Owner should have 5 solar tokens");
   }
 
   function testGettingLatitudeAndLongitude() public

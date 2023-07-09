@@ -16,6 +16,7 @@ contract House {
     uint public latitude;
     uint public longitude;
     Solar public token;
+    address public libraryAddress;
 
     // Creating a constructor to set postal code of house and pv generated to 0
     constructor(uint _latitude, uint _longitude) {                 
@@ -46,6 +47,18 @@ contract House {
     {
         console.log("Get PV generated: ",pvGeneration); 
         return pvGeneration;
+    }
+
+    // Subtract from pv generation value
+    function subtractFromPVGeneration(uint amount) public
+    {
+        pvGeneration = pvGeneration - amount;
+    }
+
+    // Subtract from pv generation value
+    function addToPVGeneration(uint amount) public
+    {
+        pvGeneration = pvGeneration + amount;
     }
 
     // Get latitude
@@ -89,8 +102,22 @@ contract House {
         }
     }
 
-    function getTokenBalance() public view returns (uint)
+    function booleanNeedPV() public view returns (bool){
+        if (pvGeneration > demand){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    function getSolarTokenBalance() public view returns (uint)
     {
         return token.balanceOf(msg.sender);
+    }
+
+    function getSolarToken() public view returns (Solar)
+    {
+        return token;
     }
 }

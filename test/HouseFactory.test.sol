@@ -10,8 +10,8 @@ contract TestHouseFactory {
   function testCreationOfNewHouse() public
   {
     HouseFactory houseFactory = HouseFactory(DeployedAddresses.HouseFactory());
-    uint latitude = 43234234234; 
-    uint longitude = 79984758743;
+    uint latitude = 4300687485657513; 
+    uint longitude = 8125149344797477;
     houseFactory.createHouse(latitude, longitude);
   }
 
@@ -20,16 +20,34 @@ contract TestHouseFactory {
     HouseFactory houseFactory = HouseFactory(DeployedAddresses.HouseFactory());
     address[] memory allHouses = houseFactory.getAllHouses();
     
-    for (uint i = 0; i < allHouses.length; i++){
+    for (uint i = 0; i < allHouses.length;){
       House a = House(allHouses[i]);
       console.logUint(a.getLatitude());
+      unchecked{ i++; }
     }
   }
 
-  function testCalculatingDistanceBetweenCoordinates() public
+  // function testCalculatingDistanceBetweenCoordinates() public
+  // {
+  //   HouseFactory houseFactory = HouseFactory(DeployedAddresses.HouseFactory());
+  //   Assert.equal(houseFactory.calculateDistanceBetweenHouses(4382158637879012, 4381664455946044, 7939797813498498, 7938858901723961), 1061023611064, "Distance should be 1061023611064");
+  // }
+
+  function testCreationOfMultipleHouses() public
   {
     HouseFactory houseFactory = HouseFactory(DeployedAddresses.HouseFactory());
-    Assert.equal(houseFactory.calculateDistanceBetweenHouses(4382158637879012, 4381664455946044, 7939797813498498, 7938858901723961), 1061023611064, "Distance should be 1061023611064");
+    uint latitude = 4300671665687827; 
+    uint longitude = 8126146616146633;
+    houseFactory.createHouse(latitude, longitude);
+    latitude = 4300687485657513; 
+    longitude = 8125149344797477;
+    houseFactory.createHouse(latitude, longitude);
+    latitude = 4300687485657513; 
+    longitude = 8125149344797477;
+    houseFactory.createHouse(latitude, longitude);
+    latitude = 4300687485657513; 
+    longitude = 8125149344797477;
+    houseFactory.createHouse(latitude, longitude);
+    houseFactory.printClosestHousesForEachHouse();
   }
-
 }

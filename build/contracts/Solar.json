@@ -12015,18 +12015,18 @@
         882
       ],
       "Solar": [
-        9620
+        10045
       ],
       "console": [
         9280
       ]
     },
-    "id": 9621,
+    "id": 10046,
     "license": "Unlicense",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 9591,
+        "id": 10016,
         "literals": [
           "solidity",
           "^",
@@ -12039,10 +12039,10 @@
       {
         "absolutePath": "hardhat/console.sol",
         "file": "hardhat/console.sol",
-        "id": 9592,
+        "id": 10017,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 9621,
+        "scope": 10046,
         "sourceUnit": 9281,
         "src": "149:29:10",
         "symbolAliases": [],
@@ -12051,10 +12051,10 @@
       {
         "absolutePath": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
         "file": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
-        "id": 9593,
+        "id": 10018,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 9621,
+        "scope": 10046,
         "sourceUnit": 780,
         "src": "179:55:10",
         "symbolAliases": [],
@@ -12065,7 +12065,7 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 9594,
+              "id": 10019,
               "name": "ERC20",
               "nameLocations": [
                 "254:5:10"
@@ -12074,7 +12074,7 @@
               "referencedDeclaration": 779,
               "src": "254:5:10"
             },
-            "id": 9595,
+            "id": 10020,
             "nodeType": "InheritanceSpecifier",
             "src": "254:5:10"
           }
@@ -12083,9 +12083,9 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 9620,
+        "id": 10045,
         "linearizedBaseContracts": [
-          9620,
+          10045,
           779,
           882,
           857,
@@ -12097,7 +12097,7 @@
         "nodes": [
           {
             "body": {
-              "id": 9618,
+              "id": 10043,
               "nodeType": "Block",
               "src": "379:209:10",
               "statements": [
@@ -12106,7 +12106,7 @@
                     "arguments": [
                       {
                         "hexValue": "4465706c6f79656420536f6c61722062792027257327",
-                        "id": 9609,
+                        "id": 10034,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -12121,11 +12121,11 @@
                         "value": "Deployed Solar by '%s'"
                       },
                       {
-                        "id": 9610,
+                        "id": 10035,
                         "name": "owner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 9599,
+                        "referencedDeclaration": 10024,
                         "src": "545:5:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -12145,7 +12145,7 @@
                         }
                       ],
                       "expression": {
-                        "id": 9606,
+                        "id": 10031,
                         "name": "console",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -12156,7 +12156,7 @@
                           "typeString": "type(library console)"
                         }
                       },
-                      "id": 9608,
+                      "id": 10033,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -12171,7 +12171,7 @@
                         "typeString": "function (string memory,address) view"
                       }
                     },
-                    "id": 9611,
+                    "id": 10036,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -12187,7 +12187,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 9612,
+                  "id": 10037,
                   "nodeType": "ExpressionStatement",
                   "src": "507:44:10"
                 },
@@ -12195,11 +12195,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 9614,
+                        "id": 10039,
                         "name": "owner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 9599,
+                        "referencedDeclaration": 10024,
                         "src": "567:5:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -12207,11 +12207,11 @@
                         }
                       },
                       {
-                        "id": 9615,
+                        "id": 10040,
                         "name": "amount",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 9597,
+                        "referencedDeclaration": 10022,
                         "src": "574:6:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -12230,7 +12230,7 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 9613,
+                      "id": 10038,
                       "name": "_mint",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
@@ -12241,7 +12241,7 @@
                         "typeString": "function (address,uint256)"
                       }
                     },
-                    "id": 9616,
+                    "id": 10041,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -12257,13 +12257,13 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 9617,
+                  "id": 10042,
                   "nodeType": "ExpressionStatement",
                   "src": "561:20:10"
                 }
               ]
             },
-            "id": 9619,
+            "id": 10044,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [
@@ -12271,7 +12271,7 @@
                 "arguments": [
                   {
                     "hexValue": "536f6c6172",
-                    "id": 9602,
+                    "id": 10027,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -12287,7 +12287,7 @@
                   },
                   {
                     "hexValue": "534c52",
-                    "id": 9603,
+                    "id": 10028,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -12302,10 +12302,10 @@
                     "value": "SLR"
                   }
                 ],
-                "id": 9604,
+                "id": 10029,
                 "kind": "baseConstructorSpecifier",
                 "modifierName": {
-                  "id": 9601,
+                  "id": 10026,
                   "name": "ERC20",
                   "nameLocations": [
                     "357:5:10"
@@ -12322,17 +12322,17 @@
             "nameLocation": "-1:-1:-1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 9600,
+              "id": 10025,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 9597,
+                  "id": 10022,
                   "mutability": "mutable",
                   "name": "amount",
                   "nameLocation": "334:6:10",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9619,
+                  "scope": 10044,
                   "src": "329:11:10",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -12341,7 +12341,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 9596,
+                    "id": 10021,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "329:4:10",
@@ -12354,12 +12354,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 9599,
+                  "id": 10024,
                   "mutability": "mutable",
                   "name": "owner",
                   "nameLocation": "350:5:10",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9619,
+                  "scope": 10044,
                   "src": "342:13:10",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -12368,7 +12368,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 9598,
+                    "id": 10023,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "342:7:10",
@@ -12384,19 +12384,19 @@
               "src": "328:28:10"
             },
             "returnParameters": {
-              "id": 9605,
+              "id": 10030,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "379:0:10"
             },
-            "scope": 9620,
+            "scope": 10045,
             "src": "317:271:10",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 9621,
+        "scope": 10046,
         "src": "236:354:10",
         "usedErrors": []
       }
@@ -12948,12 +12948,240 @@
         }
       },
       "links": {},
+      "address": "0x01c4052ac7EEF0cbDdc83F3780149D52D4174776",
+      "transactionHash": "0xa1c76956c49ab6e0a621722e47ef3b56a4a5b0d6a29422faf121dd297cbf90e3"
+    },
+    "1688835110973": {
+      "events": {
+        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Approval",
+          "type": "event"
+        },
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xDd3c31A2B2754f0438bEd4FCFFaBa5d95eB65d21",
+      "transactionHash": "0xb2a3951d6198e27f6795d1fcdcdd4b8c2b29676cdd2fdd98a22eb436d7bb0b4f"
+    },
+    "1688930094986": {
+      "events": {
+        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Approval",
+          "type": "event"
+        },
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x77D32f6f5F454Fa76f93859f49f9431CeA8c225F",
+      "transactionHash": "0x468d847b61492d7ff8599c22bd5c9bb18d0bd182d5c4b9e91f903a5b1c35fe46"
+    },
+    "1688933179968": {
+      "events": {
+        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Approval",
+          "type": "event"
+        },
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xEd447aCB0CEb49d77f317dD6D37CB64da7a7E7F8",
+      "transactionHash": "0xe0c9ebaee127257181f6306b9ee717d08ef18c9ad863e1dde4ccec6f5d149766"
+    },
+    "1688939155695": {
+      "events": {
+        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Approval",
+          "type": "event"
+        },
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event"
+        }
+      },
+      "links": {},
       "address": "0x970e8f18ebfEa0B08810f33a5A40438b9530FBCF",
-      "transactionHash": "0x8f6d90afe4e273fbcf751e7d35d29268c5a75a7a4e6ceee807280a99835b92c9"
+      "transactionHash": "0x0f1d760ad09fa346c1db34afdc6f8bbecc8f646a38bf3efa0aae39df6aae7d4a"
     }
   },
   "schemaVersion": "3.4.14",
-  "updatedAt": "2023-07-07T20:15:04.229Z",
+  "updatedAt": "2023-07-09T22:38:28.259Z",
   "networkType": "ethereum",
   "devdoc": {
     "events": {
