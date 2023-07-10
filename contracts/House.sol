@@ -7,6 +7,7 @@
 pragma solidity ^0.8.0;
 import "hardhat/console.sol";
 import "./Solar.sol";
+import "./HouseFactory.sol";
 
 contract House {
 
@@ -19,9 +20,10 @@ contract House {
     address public libraryAddress;
 
     // Creating a constructor to set postal code of house and pv generated to 0
-    constructor(uint _latitude, uint _longitude) {                 
+    constructor(uint _latitude, uint _longitude, address _libraryAddress) {                 
         latitude = _latitude;
         longitude = _longitude;
+        libraryAddress = _libraryAddress;
         pvGeneration = 0;
         console.log("Deployed House by '%s'", msg.sender);
     } 
@@ -30,6 +32,7 @@ contract House {
     function initialize(uint _latitude, uint _longitude) public {                 
         latitude = _latitude;
         longitude = _longitude;
+        libraryAddress = 0x5f8e26fAcC23FA4cbd87b8d9Dbbd33D5047abDE1;
         pvGeneration = 0;
         console.log("Deployed House by '%s'", msg.sender);
     } 
