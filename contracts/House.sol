@@ -5,27 +5,23 @@
 /// @notice 
 
 pragma solidity ^0.8.0;
-import "hardhat/console.sol";
 import "./Solar.sol";
-import "./HouseFactory.sol";
 
 contract House {
 
     // Declaring state variables
-    uint public pvGeneration;
-    uint public demand;
-    uint public latitude;
-    uint public longitude;
-    Solar public token;
-    address public libraryAddress;
+    uint private pvGeneration;
+    uint private demand;
+    uint private latitude;
+    uint private longitude;
+    Solar private token;
+    address private libraryAddress;
 
     // Creating a constructor to set postal code of house and pv generated to 0
     constructor(uint _latitude, uint _longitude, address _libraryAddress) {                 
         latitude = _latitude;
         longitude = _longitude;
         libraryAddress = _libraryAddress;
-        pvGeneration = 0;
-        console.log("Deployed House by '%s'", msg.sender);
     } 
 
     // Creating an initializer for HouseFactory to set coordinates of house and pv generated to 0
@@ -33,7 +29,6 @@ contract House {
         latitude = _latitude;
         longitude = _longitude;
         libraryAddress = 0x5f8e26fAcC23FA4cbd87b8d9Dbbd33D5047abDE1;
-        pvGeneration = 0;
         console.log("Deployed House by '%s'", msg.sender);
     } 
 
@@ -67,14 +62,12 @@ contract House {
     // Get latitude
     function getLatitude() public view returns (uint)
     {
-        console.logUint(latitude); 
         return latitude;
     }
 
     // Get longitude
     function getLongitude() public view returns (uint)
     {
-        console.logUint(longitude); 
         return longitude;
     }
 

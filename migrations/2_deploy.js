@@ -1,7 +1,8 @@
 // migrations/2_deploy.js
-const Solar = artifacts.require("Solar");
+const Solar = artifacts.require("../Solar");
 const House = artifacts.require("House");
 const HouseFactory = artifacts.require("HouseFactory");
+const AbstractHouse = artifacts.require("AbstractHouse");
 
 module.exports = async function (deployer) {
   var amount = 27;

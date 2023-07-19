@@ -6,32 +6,33 @@
 
 pragma solidity ^0.8.0;
 
-import "hardhat/console.sol";
 import "./House.sol";
 import "@openzeppelin/contracts/proxy/Clones.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 contract HouseFactory is Ownable{
 
     address public libraryAddress;
     event HouseCreated(address newHouse);
     address[] public clones; // this array is in storage
-    mapping(address => address[]) public closestHouses;
+    mapping(address => address[]) public closestHouses; 
 
     // Initializing the address that deploys the HouseFactory contract
     constructor(address _libraryAddress) {
         libraryAddress = _libraryAddress;
     }
 
-    function createHouse(uint _latitude, uint _longitude) external {
+    function createHouse(uint _latitude, uint _longitude) public {
+        uint startGas = gasleft();
         address house = Clones.clone(libraryAddress); // creates a new House object with the createClone function from CloneFactory.sol
         House newHouse = House(house);
         newHouse.initialize(_latitude, _longitude);
         clones.push(house); // adds house to array of houses in the HouseFactory contract
-        emit HouseCreated(house); // emits an event for visibility purposes
-        console.log("House created with address: ", house);
+        emit HouseCreated(house);
+        console.log("House created with address: %o", house);
         addHouseToMap(house);
+        console.log("Added house to map");
+        console.log("Gas used for createHouse(): %o", startGas - gasleft());
     }
 
     function getAllHouses() external view returns (address[] memory) {
@@ -83,6 +84,7 @@ contract HouseFactory is Ownable{
     }
 
     function addHouseToMap(address houseAddress) internal {
+        uint startGas = gasleft();
         // add house with empty array to mapping
         address[] memory emptyArray = new address[](clones.length - 1);
         closestHouses[houseAddress] = emptyArray;
@@ -96,23 +98,26 @@ contract HouseFactory is Ownable{
             closestHouses[clones[i]] = sortedArray; // add new sorted array to hashmap for particular house address
             unchecked{ i++; }
         }
+        console.log("Gas used for addHouseToMap(): %o", startGas - gasleft());
     }
 
-    function insertionSort(address[] memory houseArray, address curHouse) internal view returns (address[] memory){
+    function insertionSort(address[] memory houseArray, address curHouse) internal returns (address[] memory){
+        uint startGas = gasleft();
         uint size = houseArray.length;
         for (uint g = 1; g < size;){
             address key = houseArray[g];
             int h;
             unchecked{ h = int(g - 1); }
-            
-            uint distanceFromKeyToHouse = calculateDistanceBetweenHouses(House(key).getLatitude(), House(curHouse).getLatitude(), House(key).getLongitude(), House(curHouse).getLongitude());
-            while (h >= 0 && distanceFromKeyToHouse < calculateDistanceBetweenHouses(House(houseArray[uint(h)]).getLatitude(), House(curHouse).getLatitude(), House(houseArray[uint(h)]).getLongitude(), House(curHouse).getLongitude())){
+
+            uint distanceFromKeyToHouse = calculateDistanceBetweenHouses(1, 2, 3, 4);
+            while (h >= 0 && distanceFromKeyToHouse < calculateDistanceBetweenHouses(5, 6, 7, 8)){
                 houseArray[uint(h + 1)] = houseArray[uint(h)];
                 unchecked{ h = h - 1; }
             }
             houseArray[uint(h + 1)] = key;
             unchecked{ g++; }
         }
+        console.log("Gas used for insertionSort(): %o", startGas - gasleft());
         return houseArray;
     }
 

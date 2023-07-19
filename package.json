@@ -15,6 +15,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
+    "@ganache/console.log": "^0.4.0",
     "@openzeppelin/contracts": "^4.9.2",
     "@optionality.io/clone-factory": "^0.2.1",
     "@prb/math": "^4.0.1",

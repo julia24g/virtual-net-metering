@@ -10,7 +10,9 @@ contract TestHouse {
   {
     House house = House(DeployedAddresses.House());
     uint pvGenerated = 5;
+    uint startGas = gasleft();
     house.setPVGeneration(pvGenerated);
+    console.log("Gas used for setting PV: %o", startGas - gasleft());
     Assert.equal(house.getPVGeneration(), pvGenerated, "Owner should have 5 PV generated");
   }
   function testSettingAndGettingDemand() public
@@ -22,6 +24,7 @@ contract TestHouse {
   }
   function testWhenPVGeneratedGreaterThanDemand() public
   {
+      uint startGas = gasleft();
       House house = House(DeployedAddresses.House());
       uint demand = 10;
       uint pvGenerated = 15;
@@ -29,6 +32,7 @@ contract TestHouse {
       house.setPVGeneration(pvGenerated);
 
       Assert.equal(house.getSolarTokenBalance(), pvGenerated - demand, "Owner should have 5 solar tokens");
+      console.log("Gas used for testWhenPVGeneratedGreaterThanDemand(): %o", startGas - gasleft());
   }
 
   function testGettingLatitudeAndLongitude() public

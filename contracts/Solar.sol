@@ -6,7 +6,7 @@
 
 pragma solidity ^0.8.0;
 
-import "hardhat/console.sol";
+import "truffle/Console.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract Solar is ERC20 {
