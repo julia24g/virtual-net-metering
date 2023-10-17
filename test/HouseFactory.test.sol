@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import "truffle/Assert.sol";
 import "truffle/DeployedAddresses.sol";
-import "../contracts/HouseFactory.sol";
+import "../contracts/polygon/HouseFactory.sol";
 
 contract TestHouseFactory {
   function testCreationOfNewHouse() public
@@ -26,7 +26,7 @@ contract TestHouseFactory {
     }
   }
 
-  function testCreationOfMultipleHouses() public
+  function testCreateAndTransferOfMultipleHouses() public
   {
     HouseFactory houseFactory = HouseFactory(DeployedAddresses.HouseFactory());
     uint startGas = gasleft();
@@ -60,6 +60,7 @@ contract TestHouseFactory {
     longitude = 8125649344797477;
     houseFactory.createHouse(latitude, longitude);
     console.log("Gas used for 10 house creations: %o", startGas - gasleft());
-    houseFactory.printClosestHousesForEachHouse();
+
+    houseFactory.makeTransfer();
   }
 }
