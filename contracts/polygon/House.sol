@@ -5,7 +5,8 @@
 /// @notice 
 
 pragma solidity ^0.8.0;
-import "./Solar.sol";
+// import "./Solar.sol";
+import "truffle/Console.sol";
 
 contract House {
 
@@ -14,40 +15,45 @@ contract House {
     uint private demand;
     uint private latitude;
     uint private longitude;
-    bool private state; // F if need solar, T if don't need solar
-    Solar private token;
+    bool private needsPV; // F if need solar, T if don't need solar
+    bool private canSell;
+    // Solar private token;
 
     // Creating a constructor to set postal code of house and pv generated to 0
     constructor(uint _latitude, uint _longitude) {                 
         latitude = _latitude;
         longitude = _longitude;
-        state = false;
+        needsPV = true;
+        canSell = false;
     } 
 
     // Creating an initializer for HouseFactory to set coordinates of house and pv generated to 0
     function initialize(uint _latitude, uint _longitude) external {                 
         latitude = _latitude;
         longitude = _longitude;
-        state = false;
-        console.log("Deployed House by '%s'", msg.sender);
+        needsPV = false;
+        canSell = false;
     } 
 
     // Set pv generation value
     function setPVGeneration(uint _pvGeneration) public
     {
         pvGeneration = _pvGeneration;
-        console.log("Set PV generated to ",pvGeneration);    
         if (pvGeneration > demand)
         {
-            token = new Solar(pvGeneration - demand, msg.sender);
-            state = true;
+            //token = new Solar(pvGeneration - demand, msg.sender);
+            canSell = true;
+            needsPV = false;
+        }
+        else if (pvGeneration == demand)
+        {
+            needsPV = false;
         }
     }
 
     // Get pv generation value
     function getPVGeneration() public view returns (uint)
     {
-        console.log("Get PV generated: ",pvGeneration); 
         return pvGeneration;
     }
 
@@ -78,36 +84,42 @@ contract House {
     // Set demand Value
     function setDemand(uint _demand) public
     {
-        console.log("Set demand to ",_demand); 
         demand = _demand;
     }
 
     // Get demand value
     function getDemand() public view returns (uint)
     {
-        console.log("Get demand: ", demand); 
         return demand;
-
     }
 
-    function getState() public view returns (bool)
+    function needPV() public view returns (bool)
     {
-        console.log("Get state: ", state);
-        return state;
+        return needsPV;
     }
 
-    function changeState() public
+    function setNeedPV(bool val) public
     {
-        state = true;
+        needsPV = val;
     }
 
-    function getSolarTokenBalance() public view returns (uint)
+    function canWeSell() public view returns (bool)
     {
-        return token.balanceOf(msg.sender);
+        return canSell;
     }
 
-    function getSolarToken() public view returns (Solar)
+    function setCanSell(bool val) public
     {
-        return token;
+        canSell = val;
     }
+
+    // function getSolarTokenBalance() public view returns (uint)
+    // {
+    //     return token.balanceOf(msg.sender);
+    // }
+
+    // function getSolarToken() public view returns (Solar)
+    // {
+    //     return token;
+    // }
 }

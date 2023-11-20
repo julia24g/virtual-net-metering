@@ -3,8 +3,8 @@ pragma solidity ^0.8.0;
 
 import "truffle/Assert.sol";
 import "truffle/DeployedAddresses.sol";
-import "../contracts/polygon/HouseFactory.sol";
-import "../contracts/polygon/House.sol";
+import "../contracts/ethereum/HouseFactory.sol";
+import "../contracts/ethereum/House.sol";
 
 contract TestHouseFactory {
   // function testCreationOfNewHouse() public
@@ -30,14 +30,13 @@ contract TestHouseFactory {
   function testCreateAndTransferOfMultipleHouses() public
   {
     HouseFactory houseFactory = HouseFactory(DeployedAddresses.HouseFactory());
-    uint startGas = gasleft();
     uint latitude = 4300671665687827; 
     uint longitude = 8126146616146633;
     houseFactory.createHouse(latitude, longitude);
     latitude = 4300687485657513; 
     longitude = 8125149344797477;
-    houseFactory.createHouse(latitude, longitude);
-    // latitude = 4300687485657518; 
+    // houseFactory.createHouse(latitude, longitude);
+    // latitude = 4300687485657518;
     // longitude = 8125149342797477;
     // houseFactory.createHouse(latitude, longitude);
     // latitude = 4300487485957513; 
@@ -60,16 +59,16 @@ contract TestHouseFactory {
     // latitude = 4300687485057513; 
     // longitude = 8125649344797477;
     // houseFactory.createHouse(latitude, longitude);
-    address[] memory clones = houseFactory.getAllHouses();
-    uint demand = 10;
-    House(clones[0]).setDemand(demand);
-    House(clones[1]).setDemand(demand);
+    // address[] memory clones = houseFactory.getAllHouses();
+    // uint demand = 10;
+    // House(clones[0]).setDemand(demand);
+    // House(clones[1]).setDemand(demand);
 
-    uint supply1 = 5;
-    uint supply2 = 15;
-    House(clones[0]).setPVGeneration(supply1);
-    House(clones[1]).setPVGeneration(supply2);
+    // uint supply1 = 5;
+    // uint supply2 = 15;
+    // House(clones[0]).setPVGeneration(supply1);
+    // House(clones[1]).setPVGeneration(supply2);
 
-    houseFactory.makeTransfer();
+    // houseFactory.makeTransfer(5);
   }
 }

@@ -5,7 +5,7 @@
 /// @notice 
 
 pragma solidity ^0.8.0;
-import "./Solar.sol";
+import "truffle/Console.sol";
 
 contract House {
 
@@ -16,22 +16,21 @@ contract House {
     uint private longitude;
     bool private needsPV; // F if need solar, T if don't need solar
     bool private canSell;
-    Solar private token;
 
     // Creating a constructor to set postal code of house and pv generated to 0
-    constructor(uint _latitude, uint _longitude) {                 
+    constructor(uint _latitude, uint _longitude) {       
         latitude = _latitude;
         longitude = _longitude;
-        needsPV = false;
+        needsPV = true;
         canSell = false;
     } 
 
     // Creating an initializer for HouseFactory to set coordinates of house and pv generated to 0
-    function initialize(uint _latitude, uint _longitude) external {                 
+    function initialize(uint _latitude, uint _longitude) external {    
         latitude = _latitude;
-        longitude = _longitude;
-        needsPV = false;
-        canSell = false;
+        // longitude = _longitude;
+        // needsPV = false;
+        // canSell = false; 
     } 
 
     // Set pv generation value
@@ -40,7 +39,6 @@ contract House {
         pvGeneration = _pvGeneration;
         if (pvGeneration > demand)
         {
-            token = new Solar(pvGeneration - demand, msg.sender);
             canSell = true;
             needsPV = false;
         }
@@ -110,15 +108,5 @@ contract House {
     function setCanSell(bool val) public
     {
         canSell = val;
-    }
-
-    function getSolarTokenBalance() public view returns (uint)
-    {
-        return token.balanceOf(msg.sender);
-    }
-
-    function getSolarToken() public view returns (Solar)
-    {
-        return token;
     }
 }
