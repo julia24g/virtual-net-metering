@@ -17,7 +17,7 @@ contract HouseFactory is Ownable {
     address[] public clones; // this array is in storage
     mapping(address => address[]) public closestHouses; 
     // event solarSent(address address_from, address address_to, uint unit_amount);
-    uint constant private costOfTransfer = 15;
+    uint constant private costOfTransfer = 0;
 
     // Initializing the address that deploys the HouseFactory contract
     constructor(address _libraryAddress) {
@@ -25,37 +25,34 @@ contract HouseFactory is Ownable {
     }
 
     function createHouse(uint _latitude, uint _longitude) public {
-        uint startGas = gasleft();
         address house = Clones.clone(libraryAddress); // creates a new House object with the createClone function from CloneFactory.sol
         House newHouse = House(house);
         clones.push(house); // adds house to array of houses in the HouseFactory contract
         newHouse.initialize(_latitude, _longitude);
         addHouseToMap(house);
-        console.log("create house: ", startGas - gasleft());
     }
 
     function getAllHouses() external view returns (address[] memory) {
         return clones;
     }
 
-    function printClosestHousesForEachHouse() external view {
-        console.log("Printing from hashmap: ");
-        for (uint r = 0; r < clones.length;){
-            console.log("House: ", clones[r]);
-            address[] memory houses = closestHouses[clones[r]];
+    // function printClosestHousesForEachHouse() external view {
+    //     console.log("Printing from hashmap: ");
+    //     for (uint r = 0; r < clones.length;){
+    //         console.log("House: ", clones[r]);
+    //         address[] memory houses = closestHouses[clones[r]];
 
-            for (uint s = 0; s < houses.length;){
-                console.log("Next closest house: ", houses[s]);
-                unchecked{ s++; }
-            }
-            unchecked{ r++; }
-        }
-    }
+    //         for (uint s = 0; s < houses.length;){
+    //             console.log("Next closest house: ", houses[s]);
+    //             unchecked{ s++; }
+    //         }
+    //         unchecked{ r++; }
+    //     }
+    // }
 
     // this function will need to be called at every hour
     function makeTransfer(uint curRate) external {
         // iterate through all houses in clones
-        uint startGas = gasleft();
         if (clones.length > 1){
             for (uint r = 0; r < clones.length;){
                 House currentHouse = House(clones[r]);
@@ -82,7 +79,6 @@ contract HouseFactory is Ownable {
 
                 // go through map to see next house that needs it
                 address requestee = findHouseThatNeedsPV(clones[0]);
-                console.log("requestee address %o", requestee);
 
                 // need to make sure address exists, else there are no houses to exchange with
                 if (requestee == address(0)){
@@ -111,8 +107,6 @@ contract HouseFactory is Ownable {
                 unchecked { r++; }
             }
         }
-        uint endGas = gasleft();
-        console.log("setPV: ", startGas - endGas); 
     }
 
     function findHouseThatNeedsPV(address houseWithSolar) internal view returns (address houseNeedsPV) {

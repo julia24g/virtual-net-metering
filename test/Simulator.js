@@ -38,8 +38,8 @@ contract("Simulation", (accounts) => {
     const houseFactoryInstance = await HouseFactory.deployed();
 
     await houseFactoryInstance.createHouse(4300671665687827, 8126146616146633);
-    // await houseFactoryInstance.createHouse(4300687485657513, 8125149344797477);
-    // await houseFactoryInstance.createHouse(4300687485657518, 8125349344797477);
+    await houseFactoryInstance.createHouse(4300687485657513, 8125149344797477);
+    await houseFactoryInstance.createHouse(4300687485657518, 8125349344797477);
 
     // const houses = []
     // const clones = await houseFactoryInstance.getAllHouses()
