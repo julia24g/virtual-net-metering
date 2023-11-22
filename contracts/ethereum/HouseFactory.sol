@@ -16,8 +16,7 @@ contract HouseFactory is Ownable {
     address public libraryAddress;
     address[] public clones; // this array is in storage
     mapping(address => address[]) public closestHouses; 
-    // event solarSent(address address_from, address address_to, uint unit_amount);
-    uint constant private costOfTransfer = 0;
+    // uint constant private costOfTransfer = 0;
 
     // Initializing the address that deploys the HouseFactory contract
     constructor(address _libraryAddress) {
@@ -51,7 +50,7 @@ contract HouseFactory is Ownable {
     // }
 
     // this function will need to be called at every hour
-    function makeTransfer(uint curRate) external {
+    function makeTransfer() external {
         // iterate through all houses in clones
         if (clones.length > 1){
             for (uint r = 0; r < clones.length;){
@@ -67,10 +66,10 @@ contract HouseFactory is Ownable {
                 uint amountAvailable;
                 unchecked {amountAvailable = uint(pv - demand);}
 
-                if (costOfTransfer > amountAvailable * curRate * 10) {
-                    unchecked { r++; }
-                    continue;
-                }
+                // if (costOfTransfer > amountAvailable * curRate * 10) {
+                //     unchecked { r++; }
+                //     continue;
+                // }
 
                 if (amountAvailable == 0) {
                     unchecked { r++; }

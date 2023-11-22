@@ -10,27 +10,23 @@ import "truffle/Console.sol";
 contract House {
 
     // Declaring state variables
-    uint private pvGeneration;
-    uint private demand;
-    uint private latitude;
-    uint private longitude;
-    bool private needsPV; // F if need solar, T if don't need solar
-    bool private canSell;
+    uint private pvGeneration = 0;
+    uint private demand = 0;
+    uint private latitude = 0;
+    uint private longitude = 0;
+    bool private needsPV = true; // F if need solar, T if don't need solar
+    bool private canSell = false;
 
     // Creating a constructor to set postal code of house and pv generated to 0
     constructor(uint _latitude, uint _longitude) {       
         latitude = _latitude;
         longitude = _longitude;
-        needsPV = true;
-        canSell = false;
     } 
 
     // Creating an initializer for HouseFactory to set coordinates of house and pv generated to 0
     function initialize(uint _latitude, uint _longitude) external {    
         latitude = _latitude;
-        // longitude = _longitude;
-        // needsPV = false;
-        // canSell = false; 
+        longitude = _longitude;
     } 
 
     // Set pv generation value
