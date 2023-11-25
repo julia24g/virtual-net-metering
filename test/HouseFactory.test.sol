@@ -27,8 +27,8 @@ contract TestHouseFactory {
   //   }
   // }
 
-  function testCreateAndTransferOfMultipleHouses() public
-  {
+  // function testCreateAndTransferOfMultipleHouses() public
+  // {
     // HouseFactory houseFactory = HouseFactory(DeployedAddresses.HouseFactory());
     // uint latitude = 4300671665687827; 
     // uint longitude = 8126146616146633;
@@ -98,5 +98,5 @@ contract TestHouseFactory {
     // startGas = gasleft();
     // houseFactory.makeTransfer();
     // console.log("transfer: ", startGas - gasleft());
-  }
+  // }
 }

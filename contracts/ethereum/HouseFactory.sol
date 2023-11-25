@@ -9,13 +9,12 @@ pragma solidity ^0.8.0;
 import "./House.sol";
 import "@openzeppelin/contracts/proxy/Clones.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "truffle/Console.sol";
 
 contract HouseFactory is Ownable {
 
     address public libraryAddress;
     address[] public clones; // this array is in storage
-    mapping(address => address[]) public closestHouses; 
+    mapping(address => address[]) public closestHouses;
     // uint constant private costOfTransfer = 0;
 
     // Initializing the address that deploys the HouseFactory contract
@@ -24,10 +23,10 @@ contract HouseFactory is Ownable {
     }
 
     function createHouse(uint _latitude, uint _longitude) public {
-        address house = Clones.clone(libraryAddress); // creates a new House object with the createClone function from CloneFactory.sol
+        address house = Clones.clone(libraryAddress); // creates a new House object with the createClone function from CloneFactory.sol - not cloning the right thing?
         House newHouse = House(house);
-        clones.push(house); // adds house to array of houses in the HouseFactory contract
         newHouse.initialize(_latitude, _longitude);
+        clones.push(house); // adds house to array of houses in the HouseFactory contract
         addHouseToMap(house);
     }
 
@@ -55,8 +54,7 @@ contract HouseFactory is Ownable {
         if (clones.length > 1){
             for (uint r = 0; r < clones.length;){
                 House currentHouse = House(clones[r]);
-                // if state of house == T, calculate how much it has to share
-                if (currentHouse.getPVGeneration() > currentHouse.getDemand()){
+                if (currentHouse.getPVGeneration() < currentHouse.getDemand()){
                     unchecked { r++; }
                     continue;
                 }
@@ -66,18 +64,13 @@ contract HouseFactory is Ownable {
                 uint amountAvailable;
                 unchecked {amountAvailable = uint(pv - demand);}
 
-                // if (costOfTransfer > amountAvailable * curRate * 10) {
-                //     unchecked { r++; }
-                //     continue;
-                // }
-
                 if (amountAvailable == 0) {
                     unchecked { r++; }
                     continue;
                 }
 
                 // go through map to see next house that needs it
-                address requestee = findHouseThatNeedsPV(clones[0]);
+                address requestee = findHouseThatNeedsPV(clones[r]);
 
                 // need to make sure address exists, else there are no houses to exchange with
                 if (requestee == address(0)){
@@ -85,7 +78,8 @@ contract HouseFactory is Ownable {
                 }
 
                 uint transferAmount;
-                uint amountRequested = House(requestee).getDemand() - House(requestee).getPVGeneration();
+                uint amountRequested;
+                unchecked { amountRequested = uint(House(requestee).getDemand() - House(requestee).getPVGeneration()); }
 
                 if (amountAvailable > amountRequested){
                     transferAmount = amountRequested;
@@ -93,6 +87,10 @@ contract HouseFactory is Ownable {
                 else{
                     transferAmount = amountAvailable;
                 }
+
+                // capture amount sent
+                currentHouse.setAmountSent(transferAmount);
+                House(requestee).setAmountReceived(transferAmount);
 
                 currentHouse.subtractFromPVGeneration(transferAmount);
                 House(requestee).addToPVGeneration(transferAmount);
@@ -105,7 +103,9 @@ contract HouseFactory is Ownable {
                 }
                 unchecked { r++; }
             }
+
         }
+        setAllSentAndReceivedToZero();
     }
 
     function findHouseThatNeedsPV(address houseWithSolar) internal view returns (address houseNeedsPV) {
@@ -130,7 +130,10 @@ contract HouseFactory is Ownable {
                 // we need to remove the current house from the array
                 address[] memory houseArray = createHouseArrayMinusCurrentHouse(clones[i]);
                 // need to sort array based on distance from house we are selecting to the rest of the houses
-                address[] memory sortedArray = insertionSort(houseArray, House(clones[i]).getLatitude(), House(clones[i]).getLongitude());
+                House curHouse = House(clones[i]);
+                uint lat = curHouse.getLatitude();
+                uint long = curHouse.getLongitude();
+                address[] memory sortedArray = insertionSort(houseArray, lat, long);
                 closestHouses[clones[i]] = sortedArray; // add new sorted array to hashmap for particular house address
                 unchecked{ i++; }
             }
@@ -147,7 +150,7 @@ contract HouseFactory is Ownable {
 
             uint keyLatitude = House(key).getLatitude();
             uint keyLongitude = House(key).getLongitude();
-
+            
             uint distanceFromKeyToHouse = calculateDistanceBetweenHouses(keyLatitude, curHouseLat, keyLongitude, curHouseLong);
             while (h >= 0 && distanceFromKeyToHouse < calculateDistanceBetweenHouses(House(houseArray[uint(h)]).getLatitude(), curHouseLat, House(houseArray[uint(h)]).getLongitude(), curHouseLong)){
                 houseArray[uint(h + 1)] = houseArray[uint(h)];
@@ -191,6 +194,15 @@ contract HouseFactory is Ownable {
         } 
         else if (y != 0) {
             z = 1;
+        }
+    }
+
+    function setAllSentAndReceivedToZero() internal {
+        for (uint i = 0; i < clones.length;){
+            House(clones[i]).resetAmountSentAndAmountReceived();
+            unchecked {
+                i++;
+            }
         }
     }
 }
