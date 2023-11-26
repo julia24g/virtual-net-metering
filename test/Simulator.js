@@ -46,7 +46,7 @@ contract("Simulation", (accounts) => {
       houses.push(new House(clones[i]))
     }
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 4100; i < 4200; i++) {
         //populating supply and demand
         for (let j = 0; j < clones.length; j++){
           hourlyDemand = Math.round((randomIntFromInterval() / 100) * parseInt(loadData[i]['Total Electricity Consumption (10^7)']) + parseInt(loadData[i]['Total Electricity Consumption (10^7)']))
