@@ -91,27 +91,19 @@ contract HouseFactory is Ownable {
                 // capture amount sent
                 currentHouse.setAmountSent(transferAmount);
                 House(requestee).setAmountReceived(transferAmount);
+                console.log("get amount set", currentHouse.getAmountSent());
 
                 currentHouse.subtractFromPVGeneration(transferAmount);
                 House(requestee).addToPVGeneration(transferAmount);
-                //reset states
-                if (transferAmount == amountAvailable){
-                    currentHouse.setCanSell(false);
-                }
-                if (amountAvailable >= amountRequested){
-                    House(requestee).setNeedPV(false);
-                }
                 unchecked { r++; }
             }
-
         }
-        setAllSentAndReceivedToZero();
     }
 
     function findHouseThatNeedsPV(address houseWithSolar) internal view returns (address houseNeedsPV) {
         address[] memory houseArray = closestHouses[houseWithSolar];
         for (uint p = 0; p < houseArray.length;){
-            if (House(houseArray[p]).needPV() == true){
+            if (House(houseArray[p]).getPVGeneration() < House(houseArray[p]).getDemand()){
                 houseNeedsPV = houseArray[p];
                 return houseNeedsPV;
             }
@@ -194,15 +186,6 @@ contract HouseFactory is Ownable {
         } 
         else if (y != 0) {
             z = 1;
-        }
-    }
-
-    function setAllSentAndReceivedToZero() internal {
-        for (uint i = 0; i < clones.length;){
-            House(clones[i]).resetAmountSentAndAmountReceived();
-            unchecked {
-                i++;
-            }
         }
     }
 }

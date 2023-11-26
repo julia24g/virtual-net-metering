@@ -5,50 +5,41 @@
 /// @notice 
 
 pragma solidity ^0.8.0;
-// import "./Solar.sol";
-import "truffle/Console.sol";
 
 contract House {
 
     // Declaring state variables
     uint private pvGeneration;
     uint private demand;
-    uint private latitude;
-    uint private longitude;
-    bool private needsPV; // F if need solar, T if don't need solar
-    bool private canSell;
-    // Solar private token;
+    uint public latitude;
+    uint public longitude;
+    uint public amountReceivedThisHour;
+    uint public amountSentThisHour;
 
     // Creating a constructor to set postal code of house and pv generated to 0
-    constructor(uint _latitude, uint _longitude) {                 
+    constructor(uint _latitude, uint _longitude) {       
         latitude = _latitude;
         longitude = _longitude;
-        needsPV = true;
-        canSell = false;
+        amountSentThisHour = 0;
+        amountReceivedThisHour = 0;
+        demand = 0;
+        pvGeneration = 0;
     } 
 
     // Creating an initializer for HouseFactory to set coordinates of house and pv generated to 0
-    function initialize(uint _latitude, uint _longitude) external {                 
+    function initialize(uint _latitude, uint _longitude) external {    
         latitude = _latitude;
         longitude = _longitude;
-        needsPV = false;
-        canSell = false;
+        amountSentThisHour = 0;
+        amountReceivedThisHour = 0;
+        demand = 0;
+        pvGeneration = 0;
     } 
 
     // Set pv generation value
     function setPVGeneration(uint _pvGeneration) public
     {
         pvGeneration = _pvGeneration;
-        if (pvGeneration > demand)
-        {
-            //token = new Solar(pvGeneration - demand, msg.sender);
-            canSell = true;
-            needsPV = false;
-        }
-        else if (pvGeneration == demand)
-        {
-            needsPV = false;
-        }
     }
 
     // Get pv generation value
@@ -60,13 +51,13 @@ contract House {
     // Subtract from pv generation value
     function subtractFromPVGeneration(uint amount) public
     {
-        pvGeneration = pvGeneration - amount;
+        pvGeneration -= amount;
     }
 
     // Add to pv generation value
     function addToPVGeneration(uint amount) public
     {
-        pvGeneration = pvGeneration + amount;
+        pvGeneration += amount;
     }
 
     // Get latitude
@@ -93,33 +84,26 @@ contract House {
         return demand;
     }
 
-    function needPV() public view returns (bool)
+    function getAmountSet() public view returns (uint)
     {
-        return needsPV;
+        return amountSentThisHour;
     }
 
-    function setNeedPV(bool val) public
+    function getAmountReceived() public view returns (uint)
     {
-        needsPV = val;
+        return amountReceivedThisHour;
     }
 
-    function canWeSell() public view returns (bool)
-    {
-        return canSell;
+    function setAmountSent(uint val) public{
+        amountSentThisHour += 5 + val;
     }
 
-    function setCanSell(bool val) public
-    {
-        canSell = val;
+    function setAmountReceived(uint val) public{
+        amountReceivedThisHour += val;
     }
 
-    // function getSolarTokenBalance() public view returns (uint)
-    // {
-    //     return token.balanceOf(msg.sender);
-    // }
-
-    // function getSolarToken() public view returns (Solar)
-    // {
-    //     return token;
-    // }
+    function resetAmountSentAndAmountReceived() public{
+        amountSentThisHour = 0;
+        amountReceivedThisHour = 0;
+    }
 }

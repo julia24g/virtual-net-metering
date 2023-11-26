@@ -32,10 +32,6 @@ contract("Simulation", (accounts) => {
   let house
   let houseFactoryInstance
   it("Perform year-long simulation", async () => {
-    // Run the Python file
-    // const Cbuy = calcTouRate();
-    // const houseFactoryInstance = await HouseFactory.deployed();
-    // const house = await House.deployed();
 
     house = await House.new(parseInt(4300671665687827), parseInt(8126146616146633));
     houseFactoryInstance = await HouseFactory.new(house.address);
@@ -50,17 +46,17 @@ contract("Simulation", (accounts) => {
       houses.push(new House(clones[i]))
     }
 
-    for (let i = 4000; i < 4200; i++) {
+    for (let i = 0; i < 10; i++) {
         //populating supply and demand
         for (let j = 0; j < clones.length; j++){
           hourlyDemand = Math.round((randomIntFromInterval() / 100) * parseInt(loadData[i]['Total Electricity Consumption (10^7)']) + parseInt(loadData[i]['Total Electricity Consumption (10^7)']))
           hourlySupply = Math.round((randomIntFromInterval() / 100) * parseInt(pvProduction[i]['Lifetime Hourly Data: System power generated (kW)(10000000)']) + parseInt(pvProduction[i]['Lifetime Hourly Data: System power generated (kW)(10000000)']))
           await houses[j].setDemand(hourlyDemand)
           await houses[j].setPVGeneration(hourlySupply)
-          const demand = await houses[j].getDemand()
-          const supply = await houses[j].getPVGeneration()
-          console.log(parseInt(demand.toString()))
-          console.log(parseInt(supply.toString()))
+          // const demand = await houses[j].getDemand()
+          // const supply = await houses[j].getPVGeneration()
+          // console.log(parseInt(demand.toString()))
+          // console.log(parseInt(supply.toString()))
         }
 
         await houseFactoryInstance.makeTransfer();
@@ -69,10 +65,11 @@ contract("Simulation", (accounts) => {
         const currentAmountReceivedRow = [i]
 
         for (let i = 0; i < clones.length; i++){
-          const amountSent = await houses[i].getAmountSet();
+          const amountSent = await houses[i].getAmountSent();
           const amountReceived = await houses[i].getAmountReceived();
           currentAmountSentRow.push(parseInt(amountSent.toString()))
           currentAmountReceivedRow.push(parseInt(amountReceived.toString()))
+          await houses[i].resetAmountSentAndAmountReceived();
         }
 
         amountSentCSV.push(currentAmountSentRow)

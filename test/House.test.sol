@@ -17,9 +17,9 @@ contract TestHouse {
   // function testSettingAndGettingDemand() public returns (uint)
   // {
   //     House house = House(DeployedAddresses.House());
-  //     uint demand = 10;
-  //     house.setDemand(demand);
-  //     // Assert.equal(house.getDemand(), demand, "Owner should have 10 demand");
+  //     house.setAmountSent(5);
+  //     uint x = house.amountSentThisHour();
+  //     Assert.equal(x, 5, "Owner should have 5");
   //     return 0;
   // }
   // function testWhenPVGeneratedGreaterThanDemand() public returns (uint)

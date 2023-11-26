@@ -5,6 +5,7 @@
 /// @notice 
 
 pragma solidity ^0.8.0;
+import "truffle/Console.sol";
 
 contract House {
 
@@ -13,8 +14,6 @@ contract House {
     uint private demand;
     uint public latitude;
     uint public longitude;
-    bool private needsPV; // F if need solar, T if don't need solar
-    bool private canSell;
     uint public amountReceivedThisHour;
     uint public amountSentThisHour;
 
@@ -24,8 +23,6 @@ contract House {
         longitude = _longitude;
         amountSentThisHour = 0;
         amountReceivedThisHour = 0;
-        canSell = false;
-        needsPV = true;
         demand = 0;
         pvGeneration = 0;
     } 
@@ -36,8 +33,6 @@ contract House {
         longitude = _longitude;
         amountSentThisHour = 0;
         amountReceivedThisHour = 0;
-        canSell = false;
-        needsPV = true;
         demand = 0;
         pvGeneration = 0;
     } 
@@ -46,15 +41,6 @@ contract House {
     function setPVGeneration(uint _pvGeneration) public
     {
         pvGeneration = _pvGeneration;
-        if (pvGeneration > demand)
-        {
-            canSell = true;
-            needsPV = false;
-        }
-        else if (pvGeneration == demand)
-        {
-            needsPV = false;
-        }
     }
 
     // Get pv generation value
@@ -99,27 +85,7 @@ contract House {
         return demand;
     }
 
-    function needPV() public view returns (bool)
-    {
-        return needsPV;
-    }
-
-    function setNeedPV(bool val) public
-    {
-        needsPV = val;
-    }
-
-    function canWeSell() public view returns (bool)
-    {
-        return canSell;
-    }
-
-    function setCanSell(bool val) public
-    {
-        canSell = val;
-    }
-
-    function getAmountSet() public view returns (uint)
+    function getAmountSent() public view returns (uint)
     {
         return amountSentThisHour;
     }
@@ -130,11 +96,11 @@ contract House {
     }
 
     function setAmountSent(uint val) public{
-        amountSentThisHour += 5;
+        amountSentThisHour = amountSentThisHour + val;
     }
 
     function setAmountReceived(uint val) public{
-        amountReceivedThisHour += val;
+        amountReceivedThisHour = amountReceivedThisHour + val;
     }
 
     function resetAmountSentAndAmountReceived() public{
