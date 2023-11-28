@@ -1,27 +1,20 @@
-// const { calcTouRate } = require('../calculation');
 const HouseFactory = artifacts.require("HouseFactory");
 const House = artifacts.require("House");
 const fs = require('fs')
-
 const csv = require('fast-csv')
-const ObjectsToCsv = require('objects-to-csv');
 const { convertArrayToCSV } = require('convert-array-to-csv')
 
-const loadData = []
-const pvProduction = []
-const amountSentCSV = []
-const amountReceivedCSV = []
-const csvHeader = ["Hour since Jan 1", "House 1", "House 2", "House 3", "House 4", "House 5", "House 6", "House 7", "House 8", "House 9", "House 10"]
-
+loadData = []
+pvProduction = []
+amountSentCSV = []
+amountReceivedCSV = []
 
 fs.createReadStream('test/../load_data/PVdemand.csv')
   .pipe(csv.parse({ headers: true }))
-  .on('error', error => console.error(error))
   .on('data', row => loadData.push(row));
 
 fs.createReadStream('test/../load_data/PVproduction.csv')
 .pipe(csv.parse({ headers: true }))
-.on('error', error => console.error(error))
 .on('data', row => pvProduction.push(row));
 
 function randomIntFromInterval() { // from -10 to 10
@@ -35,69 +28,77 @@ contract("Simulation", (accounts) => {
 
     house = await House.new(parseInt(4300671665687827), parseInt(8126146616146633));
     houseFactoryInstance = await HouseFactory.new(house.address);
+    house = null
 
     await houseFactoryInstance.createHouse(parseInt(4300671665687827), parseInt(8126146616146633));
     await houseFactoryInstance.createHouse(parseInt(4300687485657513), parseInt(8125149344797477));
     await houseFactoryInstance.createHouse(parseInt(4300687485657513), parseInt(8125149344797477));
+    await houseFactoryInstance.createHouse(parseInt(4300687482657513), parseInt(8125149344717477));
+    await houseFactoryInstance.createHouse(parseInt(4300687485657713), parseInt(8125149354797477));
+    await houseFactoryInstance.createHouse(parseInt(4300687488657513), parseInt(8125149344797277));
+    await houseFactoryInstance.createHouse(parseInt(4300687483657513), parseInt(8125149344797497));
+    await houseFactoryInstance.createHouse(parseInt(4300687485657563), parseInt(8125149347797477));
+    await houseFactoryInstance.createHouse(parseInt(4300687481657513), parseInt(8125149344797077));
+    await houseFactoryInstance.createHouse(parseInt(4300687485657013), parseInt(8125149340797477));
 
-    const houses = []
-    const clones = await houseFactoryInstance.getAllHouses()
-    for (let i = 0; i < clones.length; i++){
-      houses.push(new House(clones[i]))
-    }
+    houses = await houseFactoryInstance.getAllHouses()
 
-    for (let i = 4100; i < 4200; i++) {
+    for (let i = 8710; i < 8760; i++) {
         //populating supply and demand
-        for (let j = 0; j < clones.length; j++){
+        for (let j = 0; j < 10; j++){
           hourlyDemand = Math.round((randomIntFromInterval() / 100) * parseInt(loadData[i]['Total Electricity Consumption (10^7)']) + parseInt(loadData[i]['Total Electricity Consumption (10^7)']))
           hourlySupply = Math.round((randomIntFromInterval() / 100) * parseInt(pvProduction[i]['Lifetime Hourly Data: System power generated (kW)(10000000)']) + parseInt(pvProduction[i]['Lifetime Hourly Data: System power generated (kW)(10000000)']))
-          await houses[j].setDemand(hourlyDemand)
-          await houses[j].setPVGeneration(hourlySupply)
-          // const demand = await houses[j].getDemand()
-          // const supply = await houses[j].getPVGeneration()
-          // console.log(parseInt(demand.toString()))
-          // console.log(parseInt(supply.toString()))
+          h = new House(houses[j])
+          await h.setDemand(hourlyDemand)
+          await h.setPVGeneration(hourlySupply)
+          hourlySupply = null
+          hourlyDemand = null
+          h = null
         }
 
         await houseFactoryInstance.makeTransfer();
 
-        const currentAmountSentRow = [i]
-        const currentAmountReceivedRow = [i]
+        currentAmountSentRow = [i]
+        currentAmountReceivedRow = [i]
 
-        for (let i = 0; i < clones.length; i++){
-          const amountSent = await houses[i].getAmountSent();
-          const amountReceived = await houses[i].getAmountReceived();
+        for (let k = 0; k < 10; k++){
+          h = new House(houses[k]);
+          amountSent = await h.getAmountSent();
+          amountReceived = await h.getAmountReceived();
           currentAmountSentRow.push(parseInt(amountSent.toString()))
           currentAmountReceivedRow.push(parseInt(amountReceived.toString()))
-          await houses[i].resetAmountSentAndAmountReceived();
+          amountReceived = null
+          amountSent = null
+          await h.resetAmountSentAndAmountReceived();
+          h = null
         }
 
         amountSentCSV.push(currentAmountSentRow)
         amountReceivedCSV.push(currentAmountReceivedRow)
+        currentAmountSentRow = null
+        currentAmountReceivedRow = null
         
       }
+      houseFactoryInstance = null
+      houses = null
 
-      const csvSentDataArrays = convertArrayToCSV(amountSentCSV, {
+      csvHeader = ["Hour since Jan 1", "House 1", "House 2", "House 3", "House 4", "House 5", "House 6", "House 7", "House 8", "House 9", "House 10"]
+
+      csvSentDataArrays = convertArrayToCSV(amountSentCSV, {
         csvHeader,
         separator: ','
       })
 
-      const csvReceivedDataArrays = convertArrayToCSV(amountReceivedCSV, {
+      csvReceivedDataArrays = convertArrayToCSV(amountReceivedCSV, {
         csvHeader,
         separator: ','
       })
 
       fs.writeFile('sentOutput.csv', csvSentDataArrays, err => {
-        if (err){
-          console.log(18, err);
-        }
         console.log("sent CSV file saved successfully!");
       })
 
       fs.writeFile('receivedOutput.csv', csvReceivedDataArrays, err => {
-        if (err){
-          console.log(18, err);
-        }
         console.log("received CSV file saved successfully!");
       })
 

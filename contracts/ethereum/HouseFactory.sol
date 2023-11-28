@@ -8,9 +8,9 @@ pragma solidity ^0.8.0;
 
 import "./House.sol";
 import "@openzeppelin/contracts/proxy/Clones.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+// import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract HouseFactory is Ownable {
+contract HouseFactory {
 
     address public libraryAddress;
     address[] public clones; // this array is in storage
@@ -91,7 +91,6 @@ contract HouseFactory is Ownable {
                 // capture amount sent
                 currentHouse.setAmountSent(transferAmount);
                 House(requestee).setAmountReceived(transferAmount);
-                console.log("get amount set", currentHouse.getAmountSent());
 
                 currentHouse.subtractFromPVGeneration(transferAmount);
                 House(requestee).addToPVGeneration(transferAmount);
