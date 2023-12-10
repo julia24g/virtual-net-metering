@@ -4,7 +4,7 @@
 command_to_run="truffle test"
 
 # Set the number of times to run the command
-num_iterations=1
+num_iterations=4
 
 # Set the sleep duration in seconds
 sleep_duration=1

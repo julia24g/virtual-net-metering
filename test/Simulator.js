@@ -75,6 +75,7 @@ contract("Simulation", (accounts) => {
           hourlyDemand = Math.round((randomIntFromInterval() / 100) * parseInt(loadData[i]['Total Electricity Consumption (10^7)']) + parseInt(loadData[i]['Total Electricity Consumption (10^7)']))
           h = new House(houses[j])
           await h.setDemand(hourlyDemand)
+          await h.setPVGeneration(0);
         }
 
         await houseFactoryInstance.makeTransfer();

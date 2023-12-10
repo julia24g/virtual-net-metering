@@ -54,7 +54,7 @@ contract HouseFactory {
         if (clones.length > 1){
             for (uint r = 0; r < clones.length;){
                 House currentHouse = House(clones[r]);
-                if (currentHouse.getPVGeneration() < currentHouse.getDemand()){
+                if (currentHouse.getPVGeneration() <= currentHouse.getDemand()){
                     unchecked { r++; }
                     continue;
                 }
